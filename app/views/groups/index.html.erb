@@ -1,0 +1,33 @@
+
+<div class="col-md-12">
+  <h2>群组一览表</h2>
+
+  <div class="group" >
+    <%= link_to("new group", new_group_path, class: "btn btn-default pull-right", style: "margin-bottom: 20px;") %>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>title</th>
+        <th>description</th>
+        <th colspan="2">option</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.id %></td>
+          <td><%= link_to(group.title, group_path(group)) %></td>
+          <td><%= group.description %></td>
+          <td><%= link_to("修改", edit_group_path(group), class: "btn btn-default") %></td>
+          <td><%= link_to("删除", group_path(group), method: :delete, class: "btn btn-default",
+                          data: { confirm: "你确定删除吗?"}) %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>
