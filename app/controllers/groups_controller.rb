@@ -27,10 +27,16 @@ class GroupsController < ApplicationController
   end
 
   def edit
-
+    if current_user != @group.user
+      redirect_to root_path, alert: "you have no permission"
+    end
   end
 
   def update
+    if current_user != @group.user
+      redirect_to root_path, alert: "you have no permission"
+    end
+    
     if @group.update(group_params)
       redirect_to groups_path
       flash[:notice] = "修改成功"
@@ -40,6 +46,9 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    if current_user != @group.user
+      redirect_to root_path, alert: "you have no permission"
+    end
     @group.destroy
     redirect_to groups_path
     flash[:warning] = "删除成功"
