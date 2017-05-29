@@ -48,6 +48,20 @@ class GroupsController < ApplicationController
     flash[:warning] = "删除成功"
   end
 
+  def join
+    @group = Group.find(params[:id])
+    current_user.join!(@group)
+    flash[:notice] = "加入群组成功"
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+    current_user.quit!(@group)
+    flash[:warning] = "退出群组成功"
+    redirect_to group_path(@group)
+  end
+
   private
 
   def find_group_and_check_permission
